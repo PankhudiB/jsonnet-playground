@@ -1,24 +1,28 @@
 local mandatory = import 'lib/mandatory_tasks.libsonnet';
 local tasks = import 'lib/tasks.libsonnet';
 
-local download_squads = 'DEPLOY_CHART=customer-communication-gateway make download-services --directory=kubernetes-deployer';
+local download_squads = 'DEPLOY_CHART=abc-api make download-services --directory=kubernetes-deployer';
 
 {
     Deploy_Prod: {
         jobs: {
             deploy_xyz_ui: {
-                artifacts: ['random'],
+                artifacts: ['build'],
                 resource: ['Linux'],
-                tasks: [t for t in mandatory.tasks]
+                local mandatory_tasks = mandatory.MandatoryTasks('xyz-api','configxyz.json', 'some-xyz-dir'),
+                tasks: mandatory_tasks.tasks
             },
+
             deploy_abc_ui: {
-                artifacts: ['random'],
+                artifacts: ['build'],
                 resource: ['Linux'],
-                tasks: [t for t in mandatory.tasks] +
-                        [
-                           tasks.GenericMakeCommand('bash','passed',['-c', download_squads])
-                        ]
+
+                local mandatory_tasks = mandatory.MandatoryTasks('abc-api','configabc.json', 'some-abc-dir'),
+                tasks: mandatory_tasks.tasks +
+                       [ tasks.GenericMakeCommand('bash','passed',['-c', download_squads])]
+
             }
         }
     }
 }
+
