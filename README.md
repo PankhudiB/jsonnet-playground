@@ -1,5 +1,5 @@
 # jsonnet-playground
 
-jsonnet function_returning_objects.jsonnet > output.js
+jsonnet main.jsonnet > output.json
 
 run generate_yaml.sh
