@@ -1,0 +1,3 @@
+[submodule "jsonnet-lib"]
+	path = jsonnet-lib
+	url = git@github.com:PankhudiB/jsonnet-lib.git

@@ -1,5 +1,5 @@
-local mandatory = import 'lib/tasks/mandatory_tasks.libsonnet';
-local tasks = import 'lib/tasks/tasks.libsonnet';
+local mandatory = import 'jsonnet-lib/tasks/mandatory_tasks.libsonnet';
+local tasks = import 'jsonnet-lib/tasks/tasks.libsonnet';
 
 local download_squads = 'DEPLOY_CHART=abc-api make download-services --directory=kubernetes-deployer';
 
